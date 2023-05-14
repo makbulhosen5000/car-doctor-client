@@ -1,10 +1,16 @@
 import React, { useContext } from 'react';
 import login from '../../assets/images/login/login.svg'
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Provider/AuthProvider';
+import SocialLogin from '../shared/SocialLogin/SocialLogin';
+//import { FaEyeSlash } from "react-icons/fa";
 
 const Login = () => {
     const {signIn} = useContext(AuthContext);
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    const from = location.state?.from?.pathname || '/';
 
     const loginHandler = e =>{
         e.preventDefault();
@@ -12,11 +18,13 @@ const Login = () => {
         const email = form.email.value;
         const password = form.password.value;
         const login = {email,password}
-        console.log(login);
+
         signIn(email,password)
         .then(result => {
             const user = result.user;
             console.log(user);
+            navigate(from, { replace: true });
+            
         })
         .catch(error=>{
             console.log(error);
@@ -49,9 +57,9 @@ const Login = () => {
                     <span className="label-text">Password</span>
                   </label>
                   <input
-                    type="text"
+                    type="password"
                     name="password"
-                    placeholder="password"
+                    placeholder= ""
                     className="input input-bordered"
                   />
                   <label className="label">
@@ -69,6 +77,7 @@ const Login = () => {
                 </div>
               </form>
             <p>Don't Have Account <Link to='/register' className='text-yellow-600'>Register</Link></p>
+            <SocialLogin/>
             </div>
           </div>
         </div>

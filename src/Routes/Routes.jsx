@@ -31,15 +31,21 @@ const router = createBrowserRouter([
       },
       {
         path: "book/:id",
-        element: <BookService />,
+        element: (
+          <PrivateRoute>
+            <BookService></BookService>,
+          </PrivateRoute>
+        ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/services/${params.id}`),
+          fetch(
+            `https://car-doctor-server-drab-delta.vercel.app/services/${params.id}`
+          ),
       },
       {
         path: "bookings",
         element: (
           <PrivateRoute>
-            <Bookings />
+            <Bookings></Bookings>
           </PrivateRoute>
         ),
       },

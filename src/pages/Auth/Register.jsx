@@ -3,6 +3,7 @@ import { useContext } from "react";
 import login from "../../assets/images/login/login.svg";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
+import SocialLogin from "../shared/SocialLogin/SocialLogin";
 
 const Register = () => {
   const {createUser} = useContext(AuthContext);
@@ -60,7 +61,7 @@ const Register = () => {
                   <span className="label-text">Password</span>
                 </label>
                 <input
-                  type="text"
+                  type="password"
                   name="password"
                   placeholder="password"
                   className="input input-bordered"
@@ -85,6 +86,7 @@ const Register = () => {
                 Login
               </Link>
             </p>
+            <SocialLogin/>
           </div>
         </div>
       </div>
